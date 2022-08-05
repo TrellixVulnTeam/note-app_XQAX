@@ -15,4 +15,9 @@ export class NoteService {
     var response = this.httpClient.get<Note[]>(this.notesUrl);
     return response;
   }
+
+  addNote(note: Note): Observable<Note> {
+    var response = this.httpClient.post<Note>(this.notesUrl, note);
+    return response;
+  }
 }
