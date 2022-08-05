@@ -20,4 +20,9 @@ export class NoteService {
     var response = this.httpClient.post<Note>(this.notesUrl, note);
     return response;
   }
+
+  deleteNote(note: Note): Observable<Note> {
+    var response = this.httpClient.delete<Note>(this.notesUrl + '/' + note.id);
+    return response;
+  }
 }

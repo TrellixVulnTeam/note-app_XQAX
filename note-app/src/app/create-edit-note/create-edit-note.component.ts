@@ -33,7 +33,6 @@ export class CreateEditNoteComponent implements OnInit {
   }
 
   dateChanged(event: Event) {
-    console.log(event);
     var val = (event.target as HTMLInputElement).valueAsNumber;
     this.note.date = new Date(val);
   }
