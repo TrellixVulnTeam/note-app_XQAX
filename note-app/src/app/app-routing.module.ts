@@ -9,7 +9,11 @@ const routes: Routes = [
     component: NotesComponent,
   },
   {
-    path: 'edit-create',
+    path: 'create',
+    component: CreateEditNoteComponent,
+  },
+  {
+    path: 'edit/:id',
     component: CreateEditNoteComponent,
   },
   {

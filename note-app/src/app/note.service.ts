@@ -16,6 +16,11 @@ export class NoteService {
     return response;
   }
 
+  getNoteById(id: Number): Observable<Note> {
+    var response = this.httpClient.get<Note>(this.notesUrl + '/' + id);
+    return response;
+  }
+
   addNote(note: Note): Observable<Note> {
     var response = this.httpClient.post<Note>(this.notesUrl, note);
     return response;

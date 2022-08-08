@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Note } from '../notes';
 import { NoteService } from '../note.service';
 
@@ -25,9 +25,19 @@ export class CreateEditNoteComponent implements OnInit {
 
   pageTitle: string = 'Create new note';
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url != '/create') {
+      // https://angular.io/api/router/ParamMap
+      const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
-  save(): void {
+      this.noteService.getNoteById(id).subscribe((result) => {
+        this.note = result;
+      });
+    }
+  }
+
+  save(e: Event): void {
+    e.preventDefault;
     this.noteService.addNote(this.note).subscribe();
     this.router.navigate(['notes']);
   }

@@ -1,4 +1,4 @@
-// custom variables
+// custom  bootstrap variables
 $primary: #d1228e;
 $secondary: #0b8500;
 $success: #30d121;
@@ -33,6 +33,15 @@ $theme-colors: (
   color: #000;
 }
 
-.nav .active {
-  font-weight: bolder;
+.nav {
+  .active {
+    font-weight: bolder;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .container-notes {
+    width: 66%;
+    margin: auto;
+  }
 }
