@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Note } from './notes';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Note} from './notes';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +12,18 @@ export class NoteService {
   notesUrl: string = '/api/notes';
 
   getNotes(): Observable<Note[]> {
-    var response = this.httpClient.get<Note[]>(this.notesUrl);
-    return response;
+    return this.httpClient.get<Note[]>(this.notesUrl);
   }
 
   getNoteById(id: Number): Observable<Note> {
-    var response = this.httpClient.get<Note>(this.notesUrl + '/' + id);
-    return response;
+    return this.httpClient.get<Note>(this.notesUrl + '/' + id);
   }
 
   addNote(note: Note): Observable<Note> {
-    var response = this.httpClient.post<Note>(this.notesUrl, note);
-    return response;
+    return this.httpClient.post<Note>(this.notesUrl, note);
   }
 
   deleteNote(note: Note): Observable<Note> {
-    var response = this.httpClient.delete<Note>(this.notesUrl + '/' + note.id);
-    return response;
+    return this.httpClient.delete<Note>(this.notesUrl + '/' + note.id);
   }
 }

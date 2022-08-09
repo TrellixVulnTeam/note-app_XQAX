@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Note } from '../notes';
-import { NoteService } from '../note.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import {Note} from '../notes';
+import {NoteService} from '../note.service';
 
 @Component({
   selector: 'app-create-edit-note',
@@ -14,7 +14,8 @@ export class CreateEditNoteComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private noteService: NoteService
-  ) {}
+  ) {
+  }
 
   note: Note = {
     id: 1000,
@@ -43,7 +44,7 @@ export class CreateEditNoteComponent implements OnInit {
   }
 
   dateChanged(event: Event) {
-    var val = (event.target as HTMLInputElement).valueAsNumber;
+    const val = (event.target as HTMLInputElement).valueAsNumber;
     this.note.date = new Date(val);
   }
 }
