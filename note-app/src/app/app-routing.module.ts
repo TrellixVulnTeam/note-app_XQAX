@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotesComponent } from './notes/notes.component';
 import { CreateEditNoteComponent } from './create-edit-note/create-edit-note.component';
+import {NoteGuardGuard} from "./create-edit-note/note-guard.guard";
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
+    canActivate: [NoteGuardGuard],
     component: CreateEditNoteComponent,
   },
   {
