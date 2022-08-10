@@ -17,12 +17,17 @@ export class NotesComponent implements OnInit {
   ) {}
 
   notes: Note[] = [];
+  errorMessage: string = '';
 
   ngOnInit(): void {
     // result ist Observable
-    this.noteService.getNotes().subscribe((result) => {
+/*    this.noteService.getNotes().subscribe((result) => {
       this.notes = result;
-    });
+    });*/
+    this.noteService.getNotes().subscribe({
+      next: notes => this.notes = notes,
+      error: err => this.errorMessage = err
+    })
   }
 
   delete(note: Note) {

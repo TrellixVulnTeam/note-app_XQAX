@@ -1,4 +1,4 @@
-<div class="container container-notes">
+<div class="container container-notes" *ngIf="errorMessage.length == 0">
   <div class="card text-black my-4" *ngFor="let note of notes">
     <div class="card-body">
       <h5 class="card-title">{{ note.title }}</h5>
@@ -28,4 +28,9 @@
       New Note <i class="fa-solid fa-plus text-white fa-lg"></i>
     </button>
   </div>
+</div>
+
+<div class="alert alert-warning my-4" role="alert" *ngIf="errorMessage.length">
+  There is some error on the page!
+  Error: {{errorMessage}}
 </div>

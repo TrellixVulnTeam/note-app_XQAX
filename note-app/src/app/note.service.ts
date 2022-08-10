@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Note} from './notes';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {catchError, Observable, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,10 @@ export class NoteService {
   notesUrl: string = '/api/notes';
 
   getNotes(): Observable<Note[]> {
-    return this.httpClient.get<Note[]>(this.notesUrl);
+    return this.httpClient.get<Note[]>(this.notesUrl).pipe(
+      tap(data => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
   }
 
   getNoteById(id: Number): Observable<Note> {
@@ -25,5 +28,10 @@ export class NoteService {
 
   deleteNote(note: Note): Observable<Note> {
     return this.httpClient.delete<Note>(this.notesUrl + '/' + note.id);
+  }
+
+  handleError(error: any): Observable<any> {
+    console.log('error caught: ', error);
+    return error;
   }
 }
