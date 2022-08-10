@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import {Note} from '../notes';
 import {NoteService} from '../note.service';
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-create-edit-note',
@@ -13,7 +14,8 @@ export class CreateEditNoteComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private formBuilder: FormBuilder
   ) {
   }
 
@@ -23,6 +25,13 @@ export class CreateEditNoteComponent implements OnInit {
     date: new Date(),
     text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
   };
+
+  noteForm = this.formBuilder.group({
+    id: ['', Validators.required],
+    title: ['', Validators.required],
+    date: ['', Validators.required],
+    text: ['', Validators.required]
+  })
 
   pageTitle: string = 'Create new note';
 
@@ -37,8 +46,13 @@ export class CreateEditNoteComponent implements OnInit {
     }
   }
 
-  save(e: Event): void {
-    e.preventDefault;
+  save(): void {
+    console.log(this.note.id);
+    /*this.note.id = this.noteForm.get('id')?.value;
+    this.note.title = this.noteForm.get('title')?.value;
+    this.note.date = this.noteForm.get('date')?.value;
+    this.note.text = this.noteForm.get('text')?.value;*/
+
     this.noteService.addNote(this.note).subscribe();
     this.router.navigate(['notes']);
   }
