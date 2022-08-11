@@ -48,10 +48,10 @@ export class CreateEditNoteComponent implements OnInit {
 
   save(): void {
     console.log(this.note.id);
-    /*this.note.id = this.noteForm.get('id')?.value;
+    this.note.id = this.noteForm.get('id')?.value;
     this.note.title = this.noteForm.get('title')?.value;
     this.note.date = this.noteForm.get('date')?.value;
-    this.note.text = this.noteForm.get('text')?.value;*/
+    this.note.text = this.noteForm.get('text')?.value;
 
     this.noteService.addNote(this.note).subscribe();
     this.router.navigate(['notes']);
