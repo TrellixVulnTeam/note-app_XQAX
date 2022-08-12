@@ -26,28 +26,42 @@ export class CreateEditNoteComponent implements OnInit {
     text: "Some quick example text to build on the card title and make up the bulk of the card's content.",
   };
 
+  /* https://angular.io/guide/reactive-forms#using-the-formbuilder-service-to-generate-controls */
   noteForm = this.formBuilder.group({
     id: ['', Validators.required],
-    title: ['', Validators.required],
+    title: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
     date: ['', Validators.required],
-    text: ['', Validators.required]
+    text: ['', Validators.compose([Validators.required, Validators.minLength(5)])]
   })
 
   pageTitle: string = 'Create new note';
 
   ngOnInit(): void {
     if (this.router.url != '/create') {
+
       // https://angular.io/api/router/ParamMap
       const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
+      this.pageTitle = 'Edit Note with the id ' + id;
+
       this.noteService.getNoteById(id).subscribe((result) => {
+
+        /* Note aus der Datenbank holen */
         this.note = result;
+
+        /* Geholte Note aus der Datenbank in noteForm (formBuilder) für Anzeige in View setzen */
+        this.noteForm.setValue({
+          id: this.note.id,
+          title: this.note.title,
+          date: this.note.date,
+          text: this.note.text
+        })
       });
     }
   }
 
   save(): void {
-    console.log(this.note.id);
+    /* Eingegebene Werte von Client in HTML Form holen */
     this.note.id = this.noteForm.get('id')?.value;
     this.note.title = this.noteForm.get('title')?.value;
     this.note.date = this.noteForm.get('date')?.value;

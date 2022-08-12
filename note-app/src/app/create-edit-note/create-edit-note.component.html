@@ -1,5 +1,6 @@
 <div class="container container-notes">
   <form [formGroup]="noteForm" (ngSubmit)="save()">
+    <!-- <p>Form Status: {{ noteForm.status }}</p>-->
     <h1 class="my-4">{{ pageTitle }}</h1>
     <div class="card text-black">
       <div class="card-body">
@@ -12,6 +13,14 @@
             formControlName="title"
             placeholder="Note Title"
           />
+        </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('title')?.hasError('minlength')">
+            Title is to short.
+          </div>
+          <div class="alert alert-danger" *ngIf="noteForm.get('title')?.hasError('required')">
+            Title is required.
+          </div>
         </div>
         <div
           class="mb-3">
@@ -27,6 +36,11 @@
           />
         </div>
         <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('date')?.hasError('required')">
+            Date is required.
+          </div>
+        </div>
+        <div class="mb-3">
           <label for="idNote" class="form-label">ID</label>
           <input
             type="number"
@@ -35,6 +49,11 @@
             placeholder="ID"
             formControlName="id"
           />
+        </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('id')?.hasError('required')">
+            ID is required.
+          </div>
         </div>
         <div class="mb-3">
           <label for="noteText" class="form-label">Note Text:</label>
@@ -47,12 +66,20 @@
             placeholder="Note Text"
           ></textarea>
         </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('text')?.hasError('minlength')">
+            Text is to short.
+          </div>
+          <div class="alert alert-danger" *ngIf="noteForm.get('text')?.hasError('required')">
+            Text is required.
+          </div>
+        </div>
         <div class="d-flex">
-          <button
-            type="submit" class="btn btn-primary card-link w-100"
+          <button [disabled]="noteForm.invalid"
+                  type="submit" class="btn btn-primary card-link w-100"
           >
             <i class="fa-solid fa-floppy-disk fa-lg text-white px-2"></i
-            >Speichern
+            >Save
           </button>
         </div>
       </div>
