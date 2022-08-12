@@ -13,7 +13,6 @@ export class NoteService {
 
   getNotes(): Observable<Note[]> {
     return this.httpClient.get<Note[]>(this.notesUrl).pipe(
-      tap(data => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     )
   }

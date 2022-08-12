@@ -1,5 +1,6 @@
 <div class="container container-notes">
-  <form class="">
+  <form [formGroup]="noteForm" (ngSubmit)="save()">
+    <!-- <p>Form Status: {{ noteForm.status }}</p>-->
     <h1 class="my-4">{{ pageTitle }}</h1>
     <div class="card text-black">
       <div class="card-body">
@@ -9,23 +10,35 @@
             type="text"
             class="form-control"
             id="noteTitle"
-            name="noteTitle"
+            formControlName="title"
             placeholder="Note Title"
-            [(ngModel)]="note.title"
           />
         </div>
-        <div 
-        class="mb-3">
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('title')?.hasError('minlength')">
+            Title is to short.
+          </div>
+          <div class="alert alert-danger" *ngIf="noteForm.get('title')?.hasError('required')">
+            Title is required.
+          </div>
+        </div>
+        <div
+          class="mb-3">
           <label for="dateCreated" class="form-label">Date of creating:</label>
           <input
             type="date"
             class="form-control"
             id="dateCreated"
             placeholder="Date of creating"
-            name="dateCreated"
+            formControlName="date"
             [value]="note.date | date: 'yyyy-MM-dd'"
             (input)="dateChanged($event)"
           />
+        </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('date')?.hasError('required')">
+            Date is required.
+          </div>
         </div>
         <div class="mb-3">
           <label for="idNote" class="form-label">ID</label>
@@ -34,29 +47,39 @@
             class="form-control"
             id="idNote"
             placeholder="ID"
-            name="idNote"
-            [(ngModel)]="note.id"
+            formControlName="id"
           />
+        </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('id')?.hasError('required')">
+            ID is required.
+          </div>
         </div>
         <div class="mb-3">
           <label for="noteText" class="form-label">Note Text:</label>
           <textarea
             class="form-control"
-            name="noteText"
+            formControlName="text"
             id="noteText"
             cols="30"
             rows="10"
             placeholder="Note Text"
-            [(ngModel)]="note.text"
           ></textarea>
         </div>
+        <div class="mb-3">
+          <div class="alert alert-danger" *ngIf="noteForm.get('text')?.hasError('minlength')">
+            Text is to short.
+          </div>
+          <div class="alert alert-danger" *ngIf="noteForm.get('text')?.hasError('required')">
+            Text is required.
+          </div>
+        </div>
         <div class="d-flex">
-          <button
-            class="btn btn-primary card-link w-100"
-            (click)="save($event)"
+          <button [disabled]="noteForm.invalid"
+                  type="submit" class="btn btn-primary card-link w-100"
           >
             <i class="fa-solid fa-floppy-disk fa-lg text-white px-2"></i
-            >Speichern
+            >Save
           </button>
         </div>
       </div>
