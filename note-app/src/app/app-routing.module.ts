@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotesComponent } from './notes/notes.component';
 import { CreateEditNoteComponent } from './create-edit-note/create-edit-note.component';
 import {NoteGuardGuard} from "./create-edit-note/note-guard.guard";
+import {JavascriptPracticeComponent} from "./javascript-practice/javascript-practice.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateEditNoteComponent,
+  },
+  {
+    path: 'javascript-practice',
+    component: JavascriptPracticeComponent,
   },
   {
     path: 'edit/:id',

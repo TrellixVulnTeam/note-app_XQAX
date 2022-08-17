@@ -12,6 +12,7 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './in-memory-data.service';
 import {CreateEditNoteComponent} from './create-edit-note/create-edit-note.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { JavascriptPracticeComponent } from './javascript-practice/javascript-practice.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     FooterComponent,
     NotesComponent,
     CreateEditNoteComponent,
+    JavascriptPracticeComponent,
   ],
   imports: [
     BrowserModule,
