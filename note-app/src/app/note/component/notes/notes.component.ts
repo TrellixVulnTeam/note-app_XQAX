@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { Note } from '../notes';
-import { NoteService } from '../note.service';
+import { Note } from '../../model/note.model';
+import { NoteService } from '../../services/note.service';
+import {AppState} from "../../../store/reducers";
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
+import {getAllNotes} from "../../store/note.selectors";
 
 @Component({
   selector: 'app-notes',
@@ -10,24 +14,32 @@ import { NoteService } from '../note.service';
   styleUrls: ['./notes.component.scss'],
 })
 export class NotesComponent implements OnInit {
+  notes$!: Observable<Note[]>;
+  noteToBeUpdated!: Note;
+  isUpdateActivated = false;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private noteService: NoteService
+    private noteService: NoteService,
+    private store: Store<AppState>
   ) {}
 
   notes: Note[] = [];
   errorMessage: string = '';
+
 
   ngOnInit(): void {
     // result ist Observable
 /*    this.noteService.getNotes().subscribe((result) => {
       this.notes = result;
     });*/
-    this.noteService.getNotes().subscribe({
+    /*this.noteService.getNotes().subscribe({
       next: notes => this.notes = notes,
       error: err => this.errorMessage = err
-    })
+    })*/
+
+    this.notes$ = this.store.select(getAllNotes);
   }
 
   delete(note: Note) {

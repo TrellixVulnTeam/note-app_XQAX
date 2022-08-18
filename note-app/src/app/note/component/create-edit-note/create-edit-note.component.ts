@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
-import {Note} from '../notes';
-import {NoteService} from '../note.service';
+import {Note} from '../../model/note.model';
+import {NoteService} from '../../services/note.service';
 import {FormBuilder, Validators} from "@angular/forms";
+import {AppState} from "../../../store/reducers";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-create-edit-note',
@@ -15,9 +17,12 @@ export class CreateEditNoteComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private noteService: NoteService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>
   ) {
   }
+
+
 
   note: Note = {
     id: 1000,

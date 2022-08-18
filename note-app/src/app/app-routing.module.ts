@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NotesComponent } from './notes/notes.component';
-import { CreateEditNoteComponent } from './create-edit-note/create-edit-note.component';
-import {NoteGuardGuard} from "./create-edit-note/note-guard.guard";
+import { NotesComponent } from './note/component/notes/notes.component';
+import { CreateEditNoteComponent } from './note/component/create-edit-note/create-edit-note.component';
+import {NoteGuardGuard} from "./note/component/create-edit-note/note-guard.guard";
 
 const routes: Routes = [
   {
